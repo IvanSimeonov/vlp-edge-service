@@ -1,0 +1,23 @@
+server:
+  port: 34100
+management:
+  server:
+    port: 44100
+  endpoint:
+    health:
+      probes:
+        enabled: true
+spring:
+  application:
+    name: vlp-edge-service
+  cloud:
+    gateway:
+      routes:
+        - id: vlp-auth-service
+          uri: 'http://localhost:34101'
+          predicates:
+            - Path=/api/v1/auth/**
+        - id: vlp-course-service
+          uri: 'http://localhost:34102'
+          predicates:
+            - Path=/api/v1/course/**
